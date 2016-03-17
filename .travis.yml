@@ -34,4 +34,4 @@ deploy:
   password: $CF_PASS
   organization: $CF_ORG
   space: $CF_ENV
-  skip_cleanup: false
+  skip_cleanup: true
