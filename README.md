@@ -1,4 +1,4 @@
-!https://travis-ci.org/irodgal/visioapp.svg?branch=master!:https://travis-ci.org/irodgal/visioapp
+[![Build Status](https://travis-ci.org/irodgal/visioapp.svg?branch=master)](https://travis-ci.org/irodgal/visioapp)
 
 # visioapp
 Aplicación para Visio Oftalmología Veterinaria
