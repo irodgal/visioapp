@@ -144,6 +144,11 @@ module.exports.setUpForTest = function() {
 		password = process.env.cloudant_password,
 		databaseName = process.env.cloudant_database_test;
 
+	console.log('DATOS_CONEXION');
+	console.log(me);
+	console.log(password);
+	console.log(databaseName);
+
 	var cloudant = Cloudant({account: me,password: password});
 	_this.database = cloudant.db.use(databaseName);
 
