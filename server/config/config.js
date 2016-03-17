@@ -135,7 +135,7 @@ module.exports.setUpForTest = function() {
 	//credenciales para cloudant
 	var me = process.env.cloudant_username || "nodejs",
 		password = process.env.cloudant_password,
-		databaseName = process.env.cloudant_database;
+		databaseName = process.env.cloudant_database_test;
 
 	var cloudant = Cloudant({account: me,password: password});
 	_this.database = cloudant.db.use(databaseName);

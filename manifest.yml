@@ -1,0 +1,5 @@
+---
+applications:
+- name:    visioapp
+  host:    visioapp
+  memory:  128M

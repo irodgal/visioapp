@@ -6,14 +6,14 @@ var expect = require("chai").expect,
 	config = require(path.resolve('./server/config/config'));
 
 
-describe("XXXX", function() {
+describe("Test for Users", function() {
 	//var server = request.agent("http://www.google.es");
 
 	describe("Conexión al servidor", function() {
 
 		it("rgdfgdfgdf", function(done) {
 
-
+/*
 			var user = {
 				name: 'Tomás',
 				password: 'visio'
@@ -27,10 +27,10 @@ describe("XXXX", function() {
 				.end(function(err, res) {
 					expect(res.status).to.equal(200);
 					done();
-				});
+				});*/
 
 			//console.log(server);
-			//done();
+			done();
 		});
 
 	});
