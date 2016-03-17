@@ -105,6 +105,11 @@ module.exports.setUp = function() {
 		password = process.env.cloudant_password,
 		databaseName = process.env.cloudant_database;
 
+	console.log('DATOS_CONEXION');
+	console.log(me);
+	console.log(password);
+	console.log(databaseName);
+
 	// Initialize the library with my account.
 	var cloudant = Cloudant({
 		account: me,

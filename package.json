@@ -22,8 +22,12 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "istanbul": "^0.4.2",
+    "karma": "^0.13.22",
+    "karma-mocha": "^0.2.2",
+    "karma-phantomjs-launcher": "^1.0.0",
     "mocha": "^2.4.5",
     "mocha-lcov-reporter": "^1.2.0",
+    "phantomjs-prebuilt": "^2.1.5",
     "supertest": "^1.2.0"
   },
   "scripts": {
@@ -31,6 +35,7 @@
     "start-debug": "node --debug app.js",
     "debugger": "node-inspector --web-port=18080 app.js",
     "test": "mocha -R spec",
+    "test-karma": "karma start karma.conf.js",
     "test-coverage": "istanbul cover _mocha -- --recursive",
     "coveralls": "npm run-script test-coverage -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls"
   },
