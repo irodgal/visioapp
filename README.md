@@ -1,7 +1,7 @@
 # visioapp
 Aplicación para Visio Oftalmología Veterinaria
 
-En el fichero .env están diferentes de conficguración que deben ser establecidos:
+En el fichero .env están diferentes de configuración que deben ser establecidos:
 * cloudant: los datos de acceso a la BD
 * jsonwebtoken: el valor utilizado como "SuperSecret" para generar los tokens
 
