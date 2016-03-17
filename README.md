@@ -13,6 +13,10 @@ Para la configuración de la aplicación hay que crear un fichero .env con estas
   * jsonwebtoken_super_secret=XXX
 
 NOTA: este fichero está añadido en .gitignore
+Para que git ignore los cambios de este fichero:
+```
+git update-index --assume-unchanged .env
+```
 
 ######Despliegue
 Desde Cloud Foundry CLI:

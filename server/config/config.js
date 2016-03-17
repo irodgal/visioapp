@@ -105,11 +105,6 @@ module.exports.setUp = function() {
 		password = process.env.cloudant_password,
 		databaseName = process.env.cloudant_database;
 
-	console.log('DATOS_CONEXION');
-	console.log(me);
-	console.log(password);
-	console.log(databaseName);
-
 	// Initialize the library with my account.
 	var cloudant = Cloudant({
 		account: me,
@@ -117,8 +112,6 @@ module.exports.setUp = function() {
 	}, function(err, cloudant) {
 		if (err) {
 			console.error('Failed to initialize Cloudant: ' + err.message);
-			console.error('NAME: ' + me);
-			console.error('PASSWORD: ' + password);
 		} else {
 			// en config.database estará disponible para todos
 			_this.database = cloudant.db.use(databaseName);
@@ -143,11 +136,6 @@ module.exports.setUpForTest = function() {
 	var me = process.env.cloudant_username || "nodejs",
 		password = process.env.cloudant_password,
 		databaseName = process.env.cloudant_database_test;
-
-	console.log('DATOS_CONEXION');
-	console.log(me);
-	console.log(password);
-	console.log(databaseName);
 
 	var cloudant = Cloudant({account: me,password: password});
 	_this.database = cloudant.db.use(databaseName);
