@@ -11,4 +11,4 @@ Para la configuración de la aplicaciónhay que crear un fichero .env coon estas
 * jsonwebtoken: el valor utilizado como "SuperSecret" para generar los tokens
   * jsonwebtoken_super_secret=XXX
 
-NOTA: este fichero esta añadido a .gitignore
+NOTA: este fichero está añadido en .gitignore
