@@ -112,6 +112,8 @@ module.exports.setUp = function() {
 	}, function(err, cloudant) {
 		if (err) {
 			console.error('Failed to initialize Cloudant: ' + err.message);
+			console.error('NAME: ' + me);
+			console.error('PASSWORD: ' + password);
 		} else {
 			// en config.database estará disponible para todos
 			_this.database = cloudant.db.use(databaseName);
