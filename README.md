@@ -1,7 +1,8 @@
 # visioapp
 Aplicación para Visio Oftalmología Veterinaria
 
-Para la configuración de la aplicaciónhay que crear un fichero .env coon estas variables de configuración:
+######Configuración
+Para la configuración de la aplicación hay que crear un fichero .env con estas variables de configuración:
 
 * cloudant: los datos de acceso a la BD:
   * cloudant_username=XXX
@@ -12,3 +13,14 @@ Para la configuración de la aplicaciónhay que crear un fichero .env coon estas
   * jsonwebtoken_super_secret=XXX
 
 NOTA: este fichero está añadido en .gitignore
+
+######Despliegue
+Desde Cloud Foundry CLI:
+```
+cf push
+```
+
+Para ver el último log:
+```
+cf logs visioapp --recent
+```
