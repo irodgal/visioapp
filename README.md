@@ -1,3 +1,5 @@
+!https://travis-ci.org/irodgal/visioapp.svg?branch=master!:https://travis-ci.org/irodgal/visioapp
+
 # visioapp
 Aplicación para Visio Oftalmología Veterinaria
 
@@ -12,8 +14,7 @@ Para la configuración de la aplicación hay que crear un fichero .env con estas
 * jsonwebtoken: el valor utilizado como "SuperSecret" para generar los tokens
   * jsonwebtoken_super_secret=XXX
 
-NOTA: este fichero está añadido en .gitignore
-Para que git ignore los cambios de este fichero:
+NOTA: este fichero está añadido en .gitignore; para que git ignore los cambios de este fichero:
 ```
 git update-index --assume-unchanged .env
 ```
