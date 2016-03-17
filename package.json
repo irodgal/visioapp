@@ -1,0 +1,39 @@
+{
+  "name": "visioapp",
+  "version": "0.0.1",
+  "description": "Aplicación para Visio Oftalmología Veterinaria",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irodgal/visioapp"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cloudant": "^1.4.1",
+    "compression": "^1.6.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.4",
+    "glob": "^7.0.3",
+    "jsonwebtoken": "^5.7.0",
+    "lodash": "^4.6.1",
+    "method-override": "^2.3.5",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5",
+    "mocha-lcov-reporter": "^1.2.0",
+    "supertest": "^1.2.0"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "start-debug": "node --debug app.js",
+    "debugger": "node-inspector --web-port=18080 app.js",
+    "test": "mocha -R spec",
+    "test-coverage": "istanbul cover _mocha -- --recursive",
+    "coveralls": "npm run-script test-coverage -- --report lcovonly && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls"
+  },
+  "author": "Iván R. Galicia",
+  "license": "MIT"
+}
