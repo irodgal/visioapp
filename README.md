@@ -9,6 +9,6 @@ Para la configuración de la aplicaciónhay que crear un fichero .env coon estas
   * cloudant_database=XXX
   * cloudant_database_test=XXX
 * jsonwebtoken: el valor utilizado como "SuperSecret" para generar los tokens
-  *jsonwebtoken_super_secret=XX
+  * jsonwebtoken_super_secret=XXX
 
 NOTA: este fichero esta añadido a .gitignore
