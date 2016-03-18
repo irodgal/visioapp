@@ -1,0 +1,23 @@
+{
+  "name": "visioapp",
+  "description": "Aplicación para Visio Oftalmología Veterinaria",
+  "main": "app.js",
+  "authors": [
+    "Iván R. Galicia"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/irodgal/visioapp",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.1"
+  }
+}

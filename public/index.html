@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="visioApp">  
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <script src="config.js"></script>
+    <!--<script src="models/uno.js"></script>-->
+    <script src="controllers/pruebaController.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="style-login.css"/>
+</head>
+
+<body ng-controller="pruebaCtrl as pc" class="message warning">
+    <div class="login-head">
+        <h1>Visio App</h1>
+    </div>
+    <form id="loginFormId" prependId="false">
+        <li>
+            <input type="text" class="text" id="userName" placeholder="Nombre" ng-model="pc.name" />
+            <span class="icon user"></span>
+        </li>
+        <div class="clear" />
+
+        <li>
+            <input type="password" id="password" placeholder="Password" ng-model="pc.password" />
+            <span class="icon lock"></span>
+        </li>
+
+        <div class="errorMsgStyle">{{ pc.message }}</div>
+
+        <div class="submit">
+            <input type="button" id="btnLoginId" value="Entrar" class="loginPanelBtn" ng-click="pc.prueba();"/>
+        </div>
+
+
+    </form>
+</body>  
+</html>

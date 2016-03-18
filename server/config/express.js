@@ -21,6 +21,20 @@ var initModulesServerRoutes = function(apiRoutes) {
 };
 
 /**
+ * Configure view engine
+ */
+var initViewEngine = function(app) {
+	// Set swig as the template engine
+	//app.engine('server.view.html', consolidate[config.templateEngine]);
+
+	// Set views path and view engine
+	//app.set('view engine', 'html');
+	//app.set('views', './');
+	app.set('views', path.resolve('./public/'));
+	app.set('view engine', 'jade');
+};
+
+/**
  * Initialize application middleware
  */
 var initMiddleware = function() {
@@ -59,7 +73,6 @@ var initMiddleware = function() {
 	app.use(flash());
 	*/
 
-
 	// use body parser so we can get info from POST and/or URL parameters
 	app.use(bodyParser.urlencoded({
 		extended: false
@@ -67,14 +80,17 @@ var initMiddleware = function() {
 	app.use(bodyParser.json());
 	app.use(methodOverride());
 
-	// basic route
-	app.get('/', function(req, res) {
-		res.send('Hello! The API is at /api');
-	});
+	// Initialize Express view engine
+	//initViewEngine(app);
+
+	// set the static files location /public/img will be /img for users
+	app.use('/', express.static(path.resolve('./public')));
+
+
 
 	// esta va fuera del control de token
 	//app.route('/api/a').post(coreController.getToken);
-	app.route('/api/a').post(userController.getToken);
+	app.route('/api/authentication').post(userController.getToken);
 
 	// get an instance of the router for api routes
 	//esta ruta hara el control de token
@@ -82,7 +98,6 @@ var initMiddleware = function() {
 
 	// route middleware to verify a token
 	apiRoutes.use(function(req, res, next) {
-
 		// check header or url parameters or post parameters for token
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -119,6 +134,34 @@ var initMiddleware = function() {
 
 	// Initialize modules server routes
 	initModulesServerRoutes(apiRoutes);
+
+	// Define application route
+	//app.route('/*').get('../../public/index.html');
+	/*
+	app.get('*', function(req, res) {
+		res.sendfile('../../public/index.html');
+	});
+	*/
+
+	// basic route
+	app.get('*', function(req, res) {
+		//res.send('Hello! The API is at /api');
+		res.sendFile(path.resolve('./public/index.html'));
+		/*
+		res.render('index', {
+			user: req.user || null
+		});
+		*/
+	});
+
+	// Error management
+	app.use(function(err, req, res, next) {
+		res.status(err.statusCode).send({
+			'message': 'peticion mal formada',
+			'body': err.body
+		});
+	});
+
 };
 
 var initJsonWebToken = function() {
@@ -135,6 +178,8 @@ module.exports.init = function() {
 
 	// Initialize JsonWebToken superSecret
 	initJsonWebToken();
+
+
 
 	// Start the server
 	var server = app.listen(config.port, function() {

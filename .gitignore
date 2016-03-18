@@ -34,3 +34,6 @@ node_modules
 
 # Fichero de claves (BD, token)
 .env
+
+# Modulos de bower
+public/lib/
