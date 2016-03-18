@@ -32,7 +32,13 @@
             <input type="button" id="btnLoginId" value="Entrar" class="loginPanelBtn" ng-click="pc.prueba();"/>
         </div>
 
+        <div class="submit">
+            <input type="button" id="btnGetpdf" value="Factura" class="loginPanelBtn" ng-click="pc.getPdf();"/>
+        </div>
+
 
     </form>
+
+    <object data="{{pc.content}}" type="application/pdf" style="width:860px;height:1100px;position:absolute;top:40px;left:200px;"></object>
 </body>  
 </html>

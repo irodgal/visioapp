@@ -17,7 +17,8 @@
     "jsonwebtoken": "^5.7.0",
     "lodash": "^4.6.1",
     "method-override": "^2.3.5",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "pdfkit": "^0.7.2"
   },
   "devDependencies": {
     "chai": "^3.5.0",
