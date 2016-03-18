@@ -23,7 +23,7 @@ describe("Server General Tests", function() {
 	});
 
 	describe("Wrong requests", function() {
-
+		/*
 		it("get('/XXX')", function(done) {
 			request(config.server)
 				.get('/XXX')
@@ -34,6 +34,7 @@ describe("Server General Tests", function() {
 					done();
 				});
 		});
+		*/
 
 		it("post('/XXX')", function(done) {
 			request(config.server)
