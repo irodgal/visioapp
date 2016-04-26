@@ -1,44 +1,42 @@
 <!doctype html>
-<html ng-app="visioApp">  
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+<html lang="es" ng-app="visioApp">
 
-    <script src="config.js"></script>
-    <!--<script src="models/uno.js"></script>-->
-    <script src="controllers/pruebaController.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="style-login.css"/>
+<head>
+    <title>VisioApp</title>
+    <meta charset="utf-8" />
+    <meta lang="es" />
+    <meta name="description" content="Aplicación para Visio Oftalmología Veterinaria" />
+    <meta name="author" content="Iván R. Galicia / irodgal@gmail.com" />
+    <meta name="application-name" content="VisioApp" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/style-login.css" />
 </head>
 
-<body ng-controller="pruebaCtrl as pc" class="message warning">
-    <div class="login-head">
-        <h1>Visio App</h1>
-    </div>
-    <form id="loginFormId" prependId="false">
-        <li>
-            <input type="text" class="text" id="userName" placeholder="Nombre" ng-model="pc.name" />
-            <span class="icon user"></span>
-        </li>
-        <div class="clear" />
-
-        <li>
-            <input type="password" id="password" placeholder="Password" ng-model="pc.password" />
-            <span class="icon lock"></span>
-        </li>
-
-        <div class="errorMsgStyle">{{ pc.message }}</div>
-
-        <div class="submit">
-            <input type="button" id="btnLoginId" value="Entrar" class="loginPanelBtn" ng-click="pc.prueba();"/>
-        </div>
-
-        <div class="submit">
-            <input type="button" id="btnGetpdf" value="Factura" class="loginPanelBtn" ng-click="pc.getPdf();"/>
-        </div>
+<body class="message warning">
+    
+    <visio-contenido></visio-contenido>
+    
 
 
-    </form>
+    <!--
+        <object data="{{pc.content}}" type="application/pdf" style="width:860px;height:1100px;position:absolute;top:40px;left:200px;"></object>
+    -->
 
-    <object data="{{pc.content}}" type="application/pdf" style="width:860px;height:1100px;position:absolute;top:40px;left:200px;"></object>
-</body>  
+    <!-- JavaScript References -->
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/angular-resource/angular-resource.min.js"></script>
+    <script src="/angular-local-storage/dist/angular-local-storage.min.js"></script>
+
+    <!-- Application JS -->
+    <script src="/app.js"></script>
+    <script src="/config.js"></script>
+    <script src="/componentes/componentes.js"></script>
+    <script src="/estados/estados.js"></script>
+    <script src="/estados/login/loginState.js"></script>
+    <script src="/servicios/servicios.js"></script>
+    <script src="/servicios/login/loginService.js"></script>
+</body>
+
 </html>

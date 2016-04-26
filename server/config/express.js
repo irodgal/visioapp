@@ -84,7 +84,10 @@ var initMiddleware = function() {
 	//initViewEngine(app);
 
 	// set the static files location /public/img will be /img for users
+	//__dirname apunta a visioapp/server/config
 	app.use('/', express.static(path.resolve('./public')));
+	// libraries js
+	app.use(express.static(__dirname + './../../node_modules'));
 
 
 
@@ -144,15 +147,20 @@ var initMiddleware = function() {
 	*/
 
 	// basic route
+	//con esto todo iria a index.html
+	/*
 	app.get('*', function(req, res) {
 		//res.send('Hello! The API is at /api');
 		res.sendFile(path.resolve('./public/index.html'));
+	*/
 		/*
 		res.render('index', {
 			user: req.user || null
 		});
 		*/
+	/*
 	});
+	*/
 
 	// Error management
 	app.use(function(err, req, res, next) {

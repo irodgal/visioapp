@@ -59,6 +59,12 @@ var initGlobalConfigFiles = function(config, assets) {
 
 	// Setting Globbed route files
 	config.files.server.routes = getGlobbedPaths(assets.server.routes);
+	
+	// Setting Globbed js files
+  	//config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
+	//config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/');
+	
+	//console.log(config.files);
 };
 
 var initGlobalConfig = function(me) {
