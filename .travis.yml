@@ -18,11 +18,11 @@ install:
   - npm install
 
 script:
- # - npm run-script test-coverage
-    - npm test
+  - npm run-script test-coverage
+ #  - npm test
 
 #after_success:  
-#  - npm run-script coveralls
+  - npm run-script coveralls
 
 deploy:
   provider: cloudfoundry
