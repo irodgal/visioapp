@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/irodgal/visioapp.svg?branch=master)](https://travis-ci.org/irodgal/visioapp)
+[![Coverage Status](https://coveralls.io/repos/github/irodgal/visioapp/badge.svg?branch=master)](https://coveralls.io/github/irodgal/visioapp?branch=master)
 
 # visioapp
 Aplicación para Visio Oftalmología Veterinaria
