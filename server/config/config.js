@@ -7,11 +7,13 @@ var Cloudant = require('cloudant'),
 	path = require('path'),
 	express = require('./express.js');
 
+var nano = require('nano')('http://localhost:5984');
+
 
 /**
  * Get files by glob patterns
  */
-var getGlobbedPaths = function(globPatterns, excludes) {
+var getGlobbedPaths = function (globPatterns, excludes) {
 	// URL paths regex
 	var urlRegex = new RegExp('^(?:[a-z]+:)?\/\/', 'i');
 
@@ -20,7 +22,7 @@ var getGlobbedPaths = function(globPatterns, excludes) {
 
 	// If glob pattern is array then we use each pattern in a recursive way, otherwise we use glob
 	if (_.isArray(globPatterns)) {
-		globPatterns.forEach(function(globPattern) {
+		globPatterns.forEach(function (globPattern) {
 			output = _.union(output, getGlobbedPaths(globPattern, excludes));
 		});
 	} else if (_.isString(globPatterns)) {
@@ -29,7 +31,7 @@ var getGlobbedPaths = function(globPatterns, excludes) {
 		} else {
 			var files = glob.sync(globPatterns);
 			if (excludes) {
-				files = files.map(function(file) {
+				files = files.map(function (file) {
 					if (_.isArray(excludes)) {
 						for (var i in excludes) {
 							file = file.replace(excludes[i], '');
@@ -50,7 +52,7 @@ var getGlobbedPaths = function(globPatterns, excludes) {
 /**
  * Initialize global configuration files
  */
-var initGlobalConfigFiles = function(config, assets) {
+var initGlobalConfigFiles = function (config, assets) {
 	// Appending files
 	config.files = {
 		server: {},
@@ -59,15 +61,15 @@ var initGlobalConfigFiles = function(config, assets) {
 
 	// Setting Globbed route files
 	config.files.server.routes = getGlobbedPaths(assets.server.routes);
-	
+
 	// Setting Globbed js files
-  	//config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
+	//config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/').concat(getGlobbedPaths(assets.client.js, ['public/']));
 	//config.files.client.js = getGlobbedPaths(assets.client.lib.js, 'public/');
-	
+
 	//console.log(config.files);
 };
 
-var initGlobalConfig = function(me) {
+var initGlobalConfig = function (me) {
 	// Get the default assets
 	var defaultAssets = require(path.join(process.cwd(), 'server/config/assets/default'));
 
@@ -101,7 +103,7 @@ var initGlobalConfig = function(me) {
 
 
 // Initialization: Connect with DB; if success, launch server
-module.exports.setUp = function() {
+module.exports.setUp = function () {
 	var _this = this;
 
 	_this.secret = process.env.jsonwebtoken_super_secret;
@@ -115,7 +117,7 @@ module.exports.setUp = function() {
 	var cloudant = Cloudant({
 		account: me,
 		password: password
-	}, function(err, cloudant) {
+	}, function (err, cloudant) {
 		if (err) {
 			console.error('Failed to initialize Cloudant: ' + err.message);
 		} else {
@@ -133,19 +135,27 @@ module.exports.setUp = function() {
 };
 
 // Initialize for test
-module.exports.setUpForTest = function() {
+module.exports.setUpForTest = function () {
 	var _this = this;
 
 	_this.secret = process.env.jsonwebtoken_super_secret;
 
-	//credenciales para cloudant
-	var me = process.env.cloudant_username || "nodejs",
-		password = process.env.cloudant_password,
-		databaseName = process.env.cloudant_database_test;
+	if (process.env.entorno_test == 'localhost') {
+		// bd de test en local (CouchDb)
+		_this.database = nano.db.use(process.env.cloudant_database_test);
+	} else if (process.env.entorno_test == 'cloudant_test') {
+		//credenciales para cloudant; bd de test
 
-	var cloudant = Cloudant({account: me,password: password});
-	_this.database = cloudant.db.use(databaseName);
+		var me = process.env.cloudant_username || "nodejs",
+			password = process.env.cloudant_password,
+			databaseName = process.env.cloudant_database_test;
 
+
+		var cloudant = Cloudant({ account: me, password: password });
+		_this.database = cloudant.db.use(databaseName);
+
+	}
+	
 	// Initialize configuration
 	initGlobalConfig(_this);
 

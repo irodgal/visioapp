@@ -29,7 +29,7 @@ module.exports.getToken = function (req, res) {
 	if (!req.body.password) {
 		return me.sendErrorResponse(res, 400, 'Debe introducir password');
 	}
-	
+
 	//buscar el usuario por nombre
 	config.database.view('users', 'nombreView', {
 		keys: [req.body.name]
@@ -65,6 +65,31 @@ module.exports.getToken = function (req, res) {
 	});
 };
 
+module.exports.getUserByName = function (req, res) {
+	//checkear datos de entrada obligatorios
+	if (!req.body.name) {
+		return me.sendErrorResponse(res, 400, 'Debe introducir name');
+	}
+
+	config.database.view('users', 'nombreView', {
+		keys: [req.body.name]
+	}, function (err, body) {
+		if (!err) {
+			if (body.rows.length == 0) {
+				return me.sendErrorResponse(res, 404, 'No existe usuario con nombre: ' + req.body.name);
+			} else {
+				res.send({
+					success: true,
+					message: 'Usuario encontrado',
+					user: body.rows[0].value
+				});
+			}
+		} else {
+			return me.sendErrorResponse(res, 400, err);
+		}
+	});
+};
+
 module.exports.getSecurity = function (req, res) {
 	config.database.get_security(function (er, result) {
 		if (er) {
@@ -79,11 +104,12 @@ module.exports.getSecurity = function (req, res) {
 
 };
 
-//Por ahora solo para probar; no está securizada
 module.exports.insertUser = function (req, res) {
 	//FIXME: aqui se podrian meter validaciones de campos y demás
 	//res.status(400).send(err);
 	//console.log(req);
+	//TODO: no poder insertar 2 usuarios con el mismo nombre
+	
 	var user = req.body;
 
 	//hash de la password
@@ -102,25 +128,6 @@ module.exports.insertUser = function (req, res) {
 	});
 };
 
-//Por ahora solo para probar; no está securizada
-module.exports.getUserByName = function (name, callback) {
-	config.database.view('users', 'nombreView', {
-		keys: [name]
-	}, function (err, body) {
-		//todo: cambio, solo deberia haber 1
-		if (!err) {
-			if (body.rows.length == 0) {
-				if (callback) callback(null, 404, 'No se ha encontrado usuario con nombre: ' + name);
-			} else {
-				if (callback) callback(body.rows[0].value, 200);
-			}
-		} else {
-			if (callback) callback(null, 400, err);
-		}
-	});
-};
-
-//Por ahora solo para probar; no está securizada
 module.exports.removeUser = function (user) {
 	myDatabase.destroy(user._id, user._rev, function (err, body) {
 		if (!err)
