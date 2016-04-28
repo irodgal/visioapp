@@ -108,30 +108,44 @@ module.exports.setUp = function () {
 
 	_this.secret = process.env.jsonwebtoken_super_secret;
 
-	//credenciales para cloudant
-	var me = process.env.cloudant_username || "nodejs",
-		password = process.env.cloudant_password,
-		databaseName = process.env.cloudant_database;
+	if (process.env.host_db == 'localhost') {
+		console.log("BD en local");
+		
+		// bd  en local (CouchDb)
+		_this.database = nano.db.use(process.env.cloudant_database);
 
-	// Initialize the library with my account.
-	var cloudant = Cloudant({
-		account: me,
-		password: password
-	}, function (err, cloudant) {
-		if (err) {
-			console.error('Failed to initialize Cloudant: ' + err.message);
-		} else {
-			// en config.database estará disponible para todos
-			_this.database = cloudant.db.use(databaseName);
+		// Initialize configuration
+		initGlobalConfig(_this);
 
-			// Initialize configuration
-			initGlobalConfig(_this);
+		// Initialize express config
+		express.init();
+		
+	} else if (process.env.host_db == 'cloudant') {
+		//credenciales para cloudant
+		var me = process.env.cloudant_username || "nodejs",
+			password = process.env.cloudant_password,
+			databaseName = process.env.cloudant_database;
 
-			// Initialize express config
-			express.init();
-		}
-	});
+		// Initialize the library with my account.
+		var cloudant = Cloudant({
+			account: me,
+			password: password
+		}, function (err, cloudant) {
+			if (err) {
+				console.error('Failed to initialize Cloudant: ' + err.message);
+			} else {
+				// en config.database estará disponible para todos
+				_this.database = cloudant.db.use(databaseName);
 
+				// Initialize configuration
+				initGlobalConfig(_this);
+
+				// Initialize express config
+				express.init();
+			}
+		});
+
+	}
 };
 
 // Initialize for test
@@ -140,10 +154,10 @@ module.exports.setUpForTest = function () {
 
 	_this.secret = process.env.jsonwebtoken_super_secret;
 
-	if (process.env.entorno_test == 'localhost') {
+	if (process.env.host_db_test == 'localhost') {
 		// bd de test en local (CouchDb)
 		_this.database = nano.db.use(process.env.cloudant_database_test);
-	} else if (process.env.entorno_test == 'cloudant_test') {
+	} else if (process.env.host_db_test == 'cloudant_test') {
 		//credenciales para cloudant; bd de test
 
 		var me = process.env.cloudant_username || "nodejs",
@@ -155,7 +169,7 @@ module.exports.setUpForTest = function () {
 		_this.database = cloudant.db.use(databaseName);
 
 	}
-	
+
 	// Initialize configuration
 	initGlobalConfig(_this);
 
