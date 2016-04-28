@@ -5,42 +5,45 @@ var crypto = require('crypto'),
 	express = require('../../config/express.js'),
 	config = require('../../config/config.js');
 
-module.exports.getToken = function(req, res) {
-	//chekear datos de entrada obligatorios
+var me = this;
+
+this.getEncryptedPassword = function (password) {
+	var sha256 = crypto.createHash('sha256');
+	return sha256.update(password).digest('base64');
+};
+
+this.sendErrorResponse = function (res, statusCode, message) {
+	return res.status(statusCode).send({
+		//message: errorHandler.getErrorMessage(err)
+		message: message
+	});
+}
+
+module.exports.getToken = function (req, res) {
+
+	//checkear datos de entrada obligatorios
 	if (!req.body.name) {
-		return res.status(400).send({
-			//message: errorHandler.getErrorMessage(err)
-			message: 'Debe introducir name'
-		});
+		return me.sendErrorResponse(res, 400, 'Debe introducir name');
 	}
 
 	if (!req.body.password) {
-		return res.status(400).send({
-			//message: errorHandler.getErrorMessage(err)
-			message: 'Debe introducir password'
-		});
+		return me.sendErrorResponse(res, 400, 'Debe introducir password');
 	}
-
+	
 	//buscar el usuario por nombre
 	config.database.view('users', 'nombreView', {
 		keys: [req.body.name]
-	}, function(err, body) {
+	}, function (err, body) {
 		if (!err) {
 			if (body.rows.length == 0) {
-				res.status(404).send({
-					message: 'Authentication failed. User not found.'
-				});
+				return me.sendErrorResponse(res, 404, 'Authentication failed. User not found.');
 			} else {
-				var user = body.rows[0].value;
-				
-				var sha256 = crypto.createHash('sha256');
-				var pass = sha256.update(req.body.password).digest('base64');
+				var user = body.rows[0].value,
+					encryptedPass = me.getEncryptedPassword(req.body.password);
 
 				// check if password matches
-				if (user.password != pass) {
-					res.status(401).send({
-						message: 'Authentication failed. Wrong password.'
-					});
+				if (user.password != encryptedPass) {
+					return me.sendErrorResponse(res, 401, 'Authentication failed. Wrong password.');
 				} else {
 					// if user is found and password is right, create a token
 					var token = jwt.sign(user, express.getSuperSecret(), {
@@ -57,16 +60,13 @@ module.exports.getToken = function(req, res) {
 				}
 			}
 		} else {
-			res.status(400).send({
-				//message: errorHandler.getErrorMessage(err)
-				message: err
-			});
+			return me.sendErrorResponse(res, 400, err);
 		}
 	});
 };
 
-module.exports.getSecurity = function(req, res) {
-	config.database.get_security(function(er, result) {
+module.exports.getSecurity = function (req, res) {
+	config.database.get_security(function (er, result) {
 		if (er) {
 			throw er;
 		}
@@ -77,4 +77,53 @@ module.exports.getSecurity = function(req, res) {
 		res.send(result);
 	});
 
+};
+
+//Por ahora solo para probar; no está securizada
+module.exports.insertUser = function (req, res) {
+	//FIXME: aqui se podrian meter validaciones de campos y demás
+	//res.status(400).send(err);
+	//console.log(req);
+	var user = req.body;
+
+	//hash de la password
+	user.password = crypto.createHash('sha256').update(user.password).digest('base64');
+
+	config.database.insert(user, function (err, body) {
+		if (!err) {
+			res.status(200).send(body);
+		} else {
+			res.status(400).send({
+				//message: errorHandler.getErrorMessage(err)
+				message: err
+			});
+		}
+
+	});
+};
+
+//Por ahora solo para probar; no está securizada
+module.exports.getUserByName = function (name, callback) {
+	config.database.view('users', 'nombreView', {
+		keys: [name]
+	}, function (err, body) {
+		//todo: cambio, solo deberia haber 1
+		if (!err) {
+			if (body.rows.length == 0) {
+				if (callback) callback(null, 404, 'No se ha encontrado usuario con nombre: ' + name);
+			} else {
+				if (callback) callback(body.rows[0].value, 200);
+			}
+		} else {
+			if (callback) callback(null, 400, err);
+		}
+	});
+};
+
+//Por ahora solo para probar; no está securizada
+module.exports.removeUser = function (user) {
+	myDatabase.destroy(user._id, user._rev, function (err, body) {
+		if (!err)
+			console.log(body);
+	});
 };
