@@ -26,18 +26,22 @@ function configuradorInterceptores($httpProvider) {
 }
 
 function funcionInterceptoraSeguridad($injector, $q, $rootScope, localStorageService) {
-
     var interceptor = {};
 
     // Función que se ejecutarán antes de cada petición
     interceptor.request = function (request) {
-        if (!isLoginRequest) {
+        if (isLoginRequest(request.url)) {
+            localStorageService.clearAll();
+        } else if (!localStorageService.get("token") || !localStorageService.get("user")) {
+            localStorageService.clearAll();
+            // le enviamos a login
+            var $state = $injector.get('$state');
+            $state.go('login');
+        } else {
             console.log('setea el token');
             // Enviar en la cabecera el token previamente guardado en local storage
             request.headers["x-access-token"] = localStorageService.get("token");
             request.headers["user"] = localStorageService.get("user");
-        } else {
-            localStorageService.clearAll();
         }
 
         return request;
@@ -45,7 +49,7 @@ function funcionInterceptoraSeguridad($injector, $q, $rootScope, localStorageSer
 
     // Función que se ejecutarán despues de cada respuesta con error
     interceptor.responseError = function (response) {
-        if (!isLoginRequest) {
+        if (!isLoginRequest(response.url)) {
             var $state = $injector.get('$state');
             if (response.status === 401) {
                 // Si no tenemos cookie o es inválida, recibiremos un 401

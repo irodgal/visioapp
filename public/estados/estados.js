@@ -1,5 +1,5 @@
 (function () {
 
-	angular.module('visioEstados', ['login'])
+	angular.module('visioEstados', ['login', 'dashboard'])
 
 }());

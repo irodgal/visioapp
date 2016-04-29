@@ -21,7 +21,7 @@ script:
   - npm run-script test-coverage
  #  - npm test
 
-#after_success:  
+after_success:  
   - npm run-script coveralls
 
 deploy:
