@@ -155,6 +155,8 @@ module.exports.setUpForTest = function () {
 	_this.secret = process.env.jsonwebtoken_super_secret;
 
 	if (process.env.host_db_test == 'localhost') {
+		console.log("BD en local");
+		
 		// bd de test en local (CouchDb)
 		_this.database = nano.db.use(process.env.cloudant_database_test);
 	} else if (process.env.host_db_test == 'cloudant_test') {
