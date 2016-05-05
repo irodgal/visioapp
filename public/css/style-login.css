@@ -293,3 +293,9 @@ input:-webkit-autofill:focus {
 .web-link-container a label{
 	cursor: pointer;
 }
+
+
+
+.invoices-modal .modal-dialog{
+	width: 900px;
+}
