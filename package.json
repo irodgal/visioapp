@@ -32,6 +32,7 @@
     "chai": "^3.5.0",
     "coveralls": "^2.11.9",
     "istanbul": "^0.4.2",
+    "istanbul-combine": "^0.3.0",
     "karma": "^0.13.22",
     "karma-coverage": "^1.0.0",
     "karma-mocha": "^0.2.2",
@@ -48,6 +49,7 @@
     "test": "mocha -R spec",
     "test-karma": "karma start karma.conf.js",
     "test-coverage": "istanbul cover _mocha -- --recursive",
+    "istanbul-combine": "istanbul-combine -d ./coverage/combine -r lcov ./coverage/coverage.json ./coverage/karma/report-json/coverage-final.json",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "Iván R. Galicia",

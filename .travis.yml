@@ -21,7 +21,8 @@ script:
   - npm run-script test-coverage
  #  - npm test
 
-after_success:  
+after_success:
+  - npm run-script istanbul-combine
   - npm run-script coveralls
 
 deploy:
