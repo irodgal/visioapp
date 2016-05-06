@@ -12,7 +12,7 @@
             controller: loginCtrl
         });
 
-    function loginCtrl(LoginService, localStorageService, $state) {
+    function loginCtrl(loginService, localStorageService, $state) {
         var vm = this;
         vm.usuario = {};
         vm.mostrarMenu = false;

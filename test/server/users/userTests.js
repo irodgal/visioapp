@@ -1,7 +1,7 @@
 'use strict';
 
 var expect = require("chai").expect,
-	//request = require("supertest"),
+	request = require("supertest"),
 	path = require('path'),
 	express = require('express'),
 	userController = require(path.resolve('./server/users/controllers/userController.js'));

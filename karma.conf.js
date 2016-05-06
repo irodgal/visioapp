@@ -47,7 +47,7 @@ module.exports = function (config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-      'client/**/*.js': ['coverage']
+      'public/**/*.js': ['coverage']
     },
 
 
@@ -59,11 +59,11 @@ module.exports = function (config) {
     coverageReporter: {
       dir: 'coverage/karma',
       reporters: [
-        { type: 'html', subdir: 'report-html' },
+        // { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' },
-        { type: 'json', subdir: 'report-json' },
-        { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
-        { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' }
+        { type: 'json', subdir: 'report-json' }
+        // { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
+        // { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' }
       ]
     },
 

@@ -48,7 +48,8 @@
     "test": "mocha -R spec",
     "test-karma": "karma start karma.conf.js",
     "test-coverage": "istanbul cover _mocha -- --recursive",
-    "coveralls": "npm run-script test-coverage -- && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    //"coveralls": "npm run-script test-coverage -- && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "npm run-script cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "Iván R. Galicia",
   "license": "MIT"

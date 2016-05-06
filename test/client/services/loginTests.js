@@ -10,7 +10,7 @@ describe("Client - Test for Login", function () {
     var loginService;
 
     beforeEach(function () {
-        inject(['LoginService', function (service) {
+        inject(['loginService', function (service) {
             loginService = service;
         }
         ]);

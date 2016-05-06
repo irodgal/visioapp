@@ -1,4 +1,4 @@
-angular.module('visioServicios').service('InvoicesService', invoicesService);
+angular.module('visioServicios').service('invoicesService', invoicesService);
 
     function invoicesService($http) {
        

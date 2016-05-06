@@ -1,6 +1,6 @@
 (function () {
 
-    angular.module('visioServicios').service('LoginService', loginService);
+    angular.module('visioServicios').service('loginService', loginService);
 
     function loginService($http) {
 
