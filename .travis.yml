@@ -19,6 +19,7 @@ install:
 
 script:
   - npm run-script test-coverage
+  - npm run-script test-karma
  #  - npm test
 
 after_success:
