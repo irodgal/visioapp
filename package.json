@@ -50,7 +50,7 @@
     "test-karma": "karma start karma.conf.js",
     "test-coverage": "istanbul cover _mocha -- --recursive",
     "istanbul-combine": "istanbul-combine -d ./coverage/combine -r lcov ./coverage/coverage.json ./coverage/karma/report-json/coverage-final.json",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "coveralls": "cat ./coverage/combine/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "author": "Iván R. Galicia",
   "license": "MIT"
