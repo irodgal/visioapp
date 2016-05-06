@@ -13,7 +13,7 @@
             controller: 'DashboardCtrl'
         });
 
-    function dashboardCtrl($http, $uibModal, invoicesService, $scope, $sce) {
+    function dashboardCtrl($http, $uibModal, InvoicesService, $scope, $sce) {
         var vm = this;
 
         vm.getPdf = function () {
