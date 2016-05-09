@@ -1,41 +1,45 @@
 'use strict';
 
-//var angular = require('angular');
-//require('angular-mocks');
-
 describe("Client - Test for Login", function () {
 
-    beforeEach(module('visioServicios'));
+    beforeEach(angular.mock.module('visioServicios'));
 
-    var loginService;
+    var loginService, $httpBackend;
+    var user = {
+        name: 'XXXX',
+        password: 'XXXX'
+    };
 
     beforeEach(function () {
-        inject(['loginService', function (service) {
+
+        angular.mock.inject(['loginService', function (service) {
             loginService = service;
-        }
-        ]);
+        }]);
+
     });
 
-    it("Primer test", function (done) {
-        console.log("PP");
-        console.log(loginService);
+    beforeEach(angular.mock.inject(function (_$httpBackend_) {
+        $httpBackend = _$httpBackend_;
+    }));
 
-        var user = {
-            name: 'Prueba',
-            password: '1234'
-        };
+    it("Login service tiene una funcion para hacer login", function (done) {
+        expect(loginService).to.have.property('doingLogin');
+        done();
+    });
+
+    it("La funcion que hace el login devuelve un objeto response", function (done) {
+        $httpBackend.whenPOST("/api/authentication").respond({
+            token: 'XXX'
+        });
 
         loginService.doingLogin(user)
             .then(function (result) {
-                console.log("login hecho bien");
+                expect(result.data).to.exist;
+                expect(result.data.token).to.exist;
                 done();
             })
-            .catch(function (err) {
-                console.log("login hecho mal");
-                done();
-            });
-        
-        done();
-          
+
+        $httpBackend.flush();
     });
+
 });
