@@ -13,9 +13,9 @@ var express = require('express'),
 /**
  * Configure the modules server routes
  */
-var initModulesServerRoutes = function(apiRoutes) {
+var initModulesServerRoutes = function (apiRoutes) {
 	// Globbing routing files
-	config.files.server.routes.forEach(function(routePath) {
+	config.files.server.routes.forEach(function (routePath) {
 		require(path.resolve(routePath))(apiRoutes);
 	});
 };
@@ -23,7 +23,7 @@ var initModulesServerRoutes = function(apiRoutes) {
 /**
  * Configure view engine
  */
-var initViewEngine = function(app) {
+var initViewEngine = function (app) {
 	// Set swig as the template engine
 	//app.engine('server.view.html', consolidate[config.templateEngine]);
 
@@ -37,7 +37,7 @@ var initViewEngine = function(app) {
 /**
  * Initialize application middleware
  */
-var initMiddleware = function() {
+var initMiddleware = function () {
 	// Showing stack errors
 	app.set('showStackError', true);
 
@@ -46,7 +46,7 @@ var initMiddleware = function() {
 
 	// Should be placed before express.static
 	app.use(compress({
-		filter: function(req, res) {
+		filter: function (req, res) {
 			return (/json|text|javascript|css|font|svg/).test(res.getHeader('Content-Type'));
 		},
 		level: 9
@@ -100,7 +100,7 @@ var initMiddleware = function() {
 	var apiRoutes = express.Router();
 
 	// route middleware to verify a token
-	apiRoutes.use(function(req, res, next) {
+	apiRoutes.use(function (req, res, next) {
 		// check header or url parameters or post parameters for token
 		var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
@@ -108,12 +108,29 @@ var initMiddleware = function() {
 		if (token) {
 
 			// verifies secret and checks exp
-			jwt.verify(token, app.get('superSecret'), function(err, decoded) {
+			jwt.verify(token, app.get('superSecret'), function (err, decoded) {
 				if (err) {
+					if (err.name == 'TokenExpiredError') {
+						return res.status(419).send({
+							success: false,
+							message: 'Failed to authenticate token.',
+							desc: err.message
+						});
+					} else {
+						return res.status(401).send({
+							success: false,
+							message: 'Failed to authenticate token.',
+							desc: err.message
+						});
+					}
+
+					/*
 					return res.json({
 						success: false,
 						message: 'Failed to authenticate token.'
 					});
+					*/
+
 				} else {
 					// if everything is good, save to request for use in other routes
 					req.decoded = decoded;
@@ -125,7 +142,7 @@ var initMiddleware = function() {
 
 			// if there is no token
 			// return an error
-			return res.status(403).send({
+			return res.status(401).send({
 				success: false,
 				message: 'No token provided.'
 			});
@@ -153,17 +170,17 @@ var initMiddleware = function() {
 		//res.send('Hello! The API is at /api');
 		res.sendFile(path.resolve('./public/index.html'));
 	*/
-		/*
-		res.render('index', {
-			user: req.user || null
-		});
-		*/
+	/*
+	res.render('index', {
+		user: req.user || null
+	});
+	*/
 	/*
 	});
 	*/
 
 	// Error management
-	app.use(function(err, req, res, next) {
+	app.use(function (err, req, res, next) {
 		res.status(err.statusCode).send({
 			'message': 'peticion mal formada',
 			'body': err.body
@@ -172,15 +189,15 @@ var initMiddleware = function() {
 
 };
 
-var initJsonWebToken = function() {
+var initJsonWebToken = function () {
 	app.set('superSecret', config.secret);
 }
 
-module.exports.getSuperSecret = function() {
+module.exports.getSuperSecret = function () {
 	return app.get('superSecret');
 }
 
-module.exports.init = function() {
+module.exports.init = function () {
 	// Initialize Express middleware
 	initMiddleware();
 
@@ -190,7 +207,7 @@ module.exports.init = function() {
 
 
 	// Start the server
-	var server = app.listen(config.port, function() {
+	var server = app.listen(config.port, function () {
 		console.log('Magic happens at http://localhost:' + config.port);
 	});
 

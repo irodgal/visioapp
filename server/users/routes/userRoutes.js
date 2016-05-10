@@ -4,6 +4,6 @@ var userController = require('../controllers/userController.js');
 
 module.exports = function(apiRoutes) {
 
-	apiRoutes.route('/a').get(userController.getSecurity);
+	apiRoutes.route('/a').get(userController.getDbInfo);
 
 }

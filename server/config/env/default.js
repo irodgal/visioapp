@@ -10,6 +10,7 @@ module.exports = {
   //port: process.env.PORT || 3000,
   port: process.env.PORT || 15050,
   tokenExpiresIn: '30m'
+  //tokenExpiresIn: '1m'
     /*
     templateEngine: 'swig',
     // Session Cookie settings

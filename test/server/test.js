@@ -75,9 +75,9 @@ describe("Server General Tests", function() {
 		it("get('/api/XXX')", function(done) {
 			request(config.server)
 				.get('/api/XXX')
-				.expect(403)
+				.expect(401)
 				.end(function(err, res) {
-					expect(res.status).to.equal(403);
+					expect(res.status).to.equal(401);
 					expect(res.text).to.equal('{"success":false,"message":"No token provided."}');
 					done();
 				});
@@ -86,9 +86,9 @@ describe("Server General Tests", function() {
 		it("post('/api/XXX')", function(done) {
 			request(config.server)
 				.post('/api/XXX')
-				.expect(403)
+				.expect(401)
 				.end(function(err, res) {
-					expect(res.status).to.equal(403);
+					expect(res.status).to.equal(401);
 					expect(res.text).to.equal('{"success":false,"message":"No token provided."}');
 					done();
 				});
@@ -97,9 +97,9 @@ describe("Server General Tests", function() {
 		it("put('/api/XXX')", function(done) {
 			request(config.server)
 				.put('/api/XXX')
-				.expect(403)
+				.expect(401)
 				.end(function(err, res) {
-					expect(res.status).to.equal(403);
+					expect(res.status).to.equal(401);
 					expect(res.text).to.equal('{"success":false,"message":"No token provided."}');
 					done();
 				});
@@ -108,9 +108,9 @@ describe("Server General Tests", function() {
 		it("delete('/api/XXX')", function(done) {
 			request(config.server)
 				.delete('/api/XXX')
-				.expect(403)
+				.expect(401)
 				.end(function(err, res) {
-					expect(res.status).to.equal(403);
+					expect(res.status).to.equal(401);
 					expect(res.text).to.equal('{"success":false,"message":"No token provided."}');
 					done();
 				});

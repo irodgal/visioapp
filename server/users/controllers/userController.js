@@ -90,16 +90,16 @@ module.exports.getUserByName = function (req, res) {
 	});
 };
 
-module.exports.getSecurity = function (req, res) {
-	config.database.get_security(function (er, result) {
-		if (er) {
-			throw er;
+module.exports.getDbInfo = function (req, res) {
+	config.database.get("visio", function (err, body) {
+		if (!err) {
+			res.status(200).send(body);
+		} else {
+			res.status(400).send({
+				//message: errorHandler.getErrorMessage(err)
+				message: err
+			});
 		}
-
-		console.log('Got security for prueba');
-		console.log(result);
-
-		res.send(result);
 	});
 
 };
