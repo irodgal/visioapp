@@ -93,7 +93,7 @@ var initMiddleware = function() {
 
 	// esta va fuera del control de token
 	app.route('/api/authentication').post(userController.getToken);
-	//app.route('/api/user').post(userController.insertUser);
+	app.route('/api/user').post(userController.insertUser);
 
 	// get an instance of the router for api routes
 	//esta ruta hara el control de token
