@@ -1,25 +1,33 @@
-<div class="login-head">
-    <h1>Visio App</h1>
-</div>
+<div class="container login-container">
+    <div class="row">
 
-<form id="loginFormId" prependId="false">
-    <li>
-        <input type="text" class="text" id="userName" placeholder="Nombre" ng-model="$ctrl.usuario.name" />
-        <!--<span class="icon user"></span>-->
-    </li>
-    <div class="clear" />
+        <form id="loginFormId" role="form" class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-3 col-lg-3"></div>
+                <label for="userName" class="col-sm-2 col-lg-2 control-label">Nombre</label>
+                <div class="col-sm-4 col-lg-4">
+                    <input type="text" class="form-control" id="userName" placeholder="Nombre" ng-model="$ctrl.usuario.name" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3 col-lg-3"></div>
+                <label for="password" class="col-sm-2 col-lg-2 control-label">Contrase&ntilde;a</label>
+                <div class="col-sm-4 col-lg-4">
+                    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="$ctrl.usuario.password" />
+                </div>
+            </div>
 
-    <li>
-        <input type="password" id="password" placeholder="Password" ng-model="$ctrl.usuario.password" />
-        <!--<span class="icon lock"></span>-->
-    </li>
+            <div class="form-group">
+                <div class="col-sm-12 col-lg-12 login-error-message text-center">{{ $ctrl.message }}</div>
+            </div>
 
-    <div class="errorMsgStyle">{{ $ctrl.message }}</div>
-    <div>{{$ctrl.usuario.nombre}}</div>
-    <div>{{$ctrl.token}}</div>
+            <div class="form-group">
+                <div class="col-sm-12 col-lg-12">
+                    <input type="button" id="btnLoginId" value="Entrar" class="btn btn-default center-block" ng-click="$ctrl.entrar();" />
+                </div>
+            </div>
 
-    <div class="submit">
-        <input type="button" id="btnLoginId" value="Entrar" class="loginPanelBtn" ng-click="$ctrl.entrar();" />
+        </form>
+
     </div>
-
-</form>
+</div>

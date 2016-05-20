@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
     angular.module('visioMenu', ['ui.router'])
         .controller('MenuCtrl', menuCtrl)

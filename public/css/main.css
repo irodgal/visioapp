@@ -2,3 +2,14 @@ body {
   top: 20px;
   margin: auto;
   background-color: #bada55; }
+
+.login-container {
+  margin-top: 14%; }
+
+.login-error-message {
+  color: #d6756f;
+  padding: 10px 0px; }
+
+.dashboard-container {
+  position: relative;
+  top: 51px; }

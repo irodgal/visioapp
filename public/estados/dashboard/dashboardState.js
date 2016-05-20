@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
     angular.module('dashboard', ['ui.router', 'ui.bootstrap', 'visioServicios'])
         .config(function ($stateProvider) {
@@ -17,7 +19,7 @@
         var vm = this;
 
         vm.getPdf = function () {
-            
+
             invoicesService.gettingInvoicePdf()
                 .then(function (response) {
                     var file = new Blob([response.data], {
@@ -43,7 +45,7 @@
                                 return $scope.pdfContent;
                             }
                         }
-                        
+
 
                     });
 
@@ -69,7 +71,7 @@
     angular.module('dashboard').controller('InvoicesModalCtrl', invoicesModalCtrl);
     function invoicesModalCtrl($scope, $uibModalInstance, pdfContent) {
         $scope.pdfContent = pdfContent;
-        
+
         $scope.closeModal = function () {
             $uibModalInstance.close();
         }

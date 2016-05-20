@@ -1,9 +1,17 @@
-<div class="submit">
-    <input type="button" id="btnGetpdf" value="Factura" class="loginPanelBtn" ng-click="$ctrl.getPdf();" />
+<div class="container dashboard-container">
+    <div class="row">
+
+        <div class="col-sm-12 col-lg-12">
+            <input type="button" id="btnGetpdf" value="Factura" class="btn btn-default center-block" ng-click="$ctrl.getPdf();" />
+        </div>
+        <!--
+        <div class="submit">
+            <input type="button" id="btnGetpdf" value="Factura" class="loginPanelBtn" ng-click="$ctrl.getPdf();" />
 
 
-</div>
-<!--
+        </div>
+        -->
+        <!--
 <div>
     <button type="button" class="btn btn-default" ng-click="$ctrl.openModal()">Open me!</button>
 </div>
@@ -13,16 +21,19 @@
 </div>
 -->
 
-<script type="text/ng-template" id="myModalContent.html">
-    <!--
+        <script type="text/ng-template" id="myModalContent.html">
+            <!--
     <div class="modal-header">
         <button class="btn btn-primary" type="button" ng-click="closeModal()">Cerrar</button>
     </div>
     -->
-    <div class="modal-body">
-        <object data="{{pdfContent}}" type="application/pdf" style="width:860px;height:1100px;position:relative"></object>
+            <div class="modal-body">
+                <object data="{{pdfContent}}" type="application/pdf" style="width:860px;height:1100px;position:relative"></object>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" type="button" ng-click="closeModal()">Cerrar</button>
+            </div>
+        </script>
+
     </div>
-    <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="closeModal()">Cerrar</button>
-    </div>
-</script>
+</div>
