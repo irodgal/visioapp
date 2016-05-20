@@ -7,7 +7,7 @@ var FILE_ENCODING = 'utf-8',
     _fs = require('fs');
 
 var isProduction = false;
-if (process.env.host_db == 'localhost') {
+if (process.env.host_db == 'cloudant') {
     isProduction = true;
 }
 
