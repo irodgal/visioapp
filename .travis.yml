@@ -23,8 +23,8 @@ script:
  #  - npm test
 
 after_success:
-  - npm run-scriptbuild-css
-  - npm run-scriptminify-css
+  - npm run-script build-css
+  - npm run-script minify-css
   - npm run-script minify-js
   - npm run-script build
   - npm run-script istanbul-combine
