@@ -66,7 +66,7 @@
     "minify-css": "cat ./public/css/*.css | cleancss -o public/dist/visioapp.min.css",
     "minify-css-win": "type public\\css\\*.css | cleancss -o public/dist/visioapp.min.css",
     "minify-js": "node bin/minify.js",
-    "build": "node pp.js",
+    "build": "node bin/build.js",
     "test": "mocha -R spec",
     "test-karma": "karma start karma.conf.js",
     "test-coverage": "istanbul cover _mocha -- --recursive",

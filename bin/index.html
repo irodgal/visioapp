@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="es" ng-app="visioApp">
+
+<head>
+    <title>VisioApp</title>
+    <meta charset="utf-8" />
+    <meta lang="es" />
+    <meta name="description" content="Aplicación para Visio Oftalmología Veterinaria" />
+    <meta name="author" content="Iván R. Galicia / irodgal@gmail.com" />
+    <meta name="application-name" content="VisioApp" />
+
+    <!-- CSS -->
+    {{#isProduction}}
+        <link rel="stylesheet" type="text/css" href="/css/min/visioapp.min.css" />
+    {{/isProduction}}
+    {{^isProduction}}
+        <link rel="stylesheet" type="text/css" href="/css/style-login.css" />
+    {{/isProduction}}
+    <link rel="stylesheet" type="text/css" href="/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+
+<body class="message warning">
+    <visio-menu></visio-menu>
+    <visio-contenido></visio-contenido>
+    
+
+
+    <!--
+        <object data="{{pc.content}}" type="application/pdf" style="width:860px;height:1100px;position:absolute;top:40px;left:200px;"></object>
+    -->
+
+    <!-- JavaScript References -->
+    <script src="/angular/angular.min.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/angular-resource/angular-resource.min.js"></script>
+    <script src="/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+    <!-- Application JS -->
+    <script src="/app.js"></script>
+    <script src="/config.js"></script>
+    <script src="/componentes/componentes.js"></script>
+    <script src="/componentes/menu/menu.js"></script>
+    <script src="/estados/estados.js"></script>
+    <script src="/estados/login/loginState.js"></script>
+    <script src="/estados/dashboard/dashboardState.js"></script>
+    <script src="/servicios/servicios.js"></script>
+    <script src="/servicios/login/loginService.js"></script>
+    <script src="/servicios/invoices/invoicesService.js"></script>
+</body>
+
+</html>
