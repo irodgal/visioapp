@@ -2,5 +2,5 @@
 --require source-map-support/register
 --full-trace
 #--bail
-test/server/test.ts
-test/server/**/*.ts
+test/test.ts
+test/**/*.ts
